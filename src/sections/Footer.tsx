@@ -37,14 +37,14 @@ const Footer = () => {
 
             </div>
 
-            <p className="absolute bottom-10 left-6 text-[6rem] sm:text-[10rem] font-bold text-black/5 pointer-events-none select-none">
+            <p className="absolute bottom-5 sm:bottom-10 left-6 text-[3rem] sm:text-[10rem] font-bold text-black/5 pointer-events-none select-none whitespace-nowrap">
                 GUSTIN RHEZA
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-between items-center mt-20 text-sm text-gray-500">
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-20 mb-24 sm:mb-0 text-sm text-gray-500 gap-4">
                 <p>Copyright {new Date().getFullYear()}</p>
 
-                <div className="flex gap-6 mt-4 sm:mt-0">
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                     <span>Instagram</span>
                     <span>LinkedIn</span>
                     <span>Dribbble</span>
@@ -52,11 +52,11 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-20">
-                <Button className="flex items-center gap-4 bg-black text-white rounded-full px-3 py-4">
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-8 sm:bottom-20">
+                <Button className="flex items-center gap-4 bg-black text-white rounded-full px-5 py-3 sm:px-3 sm:py-4 whitespace-nowrap">
                     <span className="text-sm">Let's Discuss</span>
-                    <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3" />
+                    <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center shrink-0">
+                        <ArrowRight className="w-3 h-3 text-black" />
                     </span>
                 </Button>
             </div>

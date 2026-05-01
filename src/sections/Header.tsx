@@ -39,7 +39,7 @@ const Header = () => {
       <div className="relative z-20">
         <Navigation />
 
-        <div className="grid grid-cols-3 gap-4 py-24 px-6 sm:px-12">
+        <div className="grid grid-cols-3 gap-4 py-12 sm:py-24 px-6 sm:px-12">
 
           <div className="col-span-3 sm:col-span-2">
             <p className="text-[4rem] sm:text-[8rem] lg:text-[12rem] xl:text-[15rem] font-semibold text-white leading-none">
@@ -48,27 +48,27 @@ const Header = () => {
             </p>
           </div>
 
-          <div className="flex flex-col justify-end items-end">
+          <div className="hidden sm:flex flex-col justify-end items-end">
             <Button className="!rounded-full p-0 flex items-center justify-center border border-gray-500 w-12 h-12 sm:w-20 sm:h-20">
               <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-16 px-6 sm:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-8 sm:mt-16 px-6 sm:px-12">
 
-          <div className="flex gap-10 sm:gap-16 text-white items-end">
+          <div className="flex flex-wrap gap-6 sm:gap-16 text-white items-end">
             <div>
               <p className="text-2xl sm:text-3xl font-semibold">1+</p>
-              <p className="text-sm text-gray-400">Years of experience</p>
+              <p className="text-xs sm:text-sm text-gray-400">Years of experience</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-semibold">10+</p>
-              <p className="text-sm text-gray-400">Successful project</p>
+              <p className="text-xs sm:text-sm text-gray-400">Successful project</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-semibold">98%</p>
-              <p className="text-sm text-gray-400">Satisfied clients</p>
+              <p className="text-xs sm:text-sm text-gray-400">Satisfied clients</p>
             </div>
           </div>
 
