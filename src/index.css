@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --primary: #1e1e1e;
+  --secondary: #074f37;
+  --third: #2dfa43;
+  font: 400 16px/1.5 'Inter', sans-serif;
+}
+
+.inter-font {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
