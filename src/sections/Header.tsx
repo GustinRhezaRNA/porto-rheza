@@ -50,7 +50,10 @@ const Header = () => {
 
           <div className="hidden sm:flex flex-col justify-end items-end">
             <a href="#about" className="w-fit block">
-              <Button className="!rounded-full p-0 flex items-center justify-center border border-gray-500 w-12 h-12 sm:w-20 sm:h-20 hover:bg-white/10 transition-colors">
+              <Button 
+                aria-label="Scroll to About section"
+                className="!rounded-full p-0 flex items-center justify-center border border-gray-500 w-12 h-12 sm:w-20 sm:h-20 hover:bg-white/10 transition-colors"
+              >
                 <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </Button>
             </a>

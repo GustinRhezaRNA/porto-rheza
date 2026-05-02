@@ -101,6 +101,8 @@ const Journey = () => {
                                 <img 
                                     src={item.image} 
                                     alt="Journey" 
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-700"></div>

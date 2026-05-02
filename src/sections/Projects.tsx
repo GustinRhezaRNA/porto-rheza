@@ -68,6 +68,8 @@ const Projects = () => {
                             <img
                                 src={project.image}
                                 alt={project.title}
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover grayscale transition-all duration-1000 ease-out group-hover:grayscale-0 group-hover:scale-105"
                             />
                             
@@ -80,7 +82,7 @@ const Projects = () => {
                         </div>
 
                         {/* Metadata */}
-                        <div className="mt-8 flex flex-col gap-1 uppercase tracking-[0.15em] text-[10px] font-semibold text-gray-400">
+                        <div className="mt-8 flex flex-col gap-1 uppercase tracking-[0.15em] text-[10px] font-semibold text-gray-600">
                             <div className="flex justify-between items-start">
                                 <div className="flex gap-12">
                                     <span className="text-gray-400">{project.id}</span>
@@ -101,7 +103,7 @@ const Projects = () => {
             <div className="flex flex-col justify-center mt-12 text-md cursor-pointer underline underline-offset-8 items-center font-semibold gap-2 " >
                 Other Projects
                 <div className="flex gap-5 mt-3">
-                    <a href="https://github.com/GustinRhezaRNA" className="hover:text-third transition">
+                    <a href="https://github.com/GustinRhezaRNA" aria-label="GitHub Profile" className="hover:text-third transition">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 
                                         0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756
@@ -117,7 +119,7 @@ const Projects = () => {
                         </svg>
                     </a>
 
-                    <a href="https://gitlab.com/rezarna4" className="hover:text-third transition">
+                    <a href="https://gitlab.com/rezarna4" aria-label="GitLab Profile" className="hover:text-third transition">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M22.65 13.39l-2.16-6.64a.86.86 0 0 0-1.63 0l-1.46 4.5H6.6L5.14 6.75a.86.86 0 0 0-1.63 0L1.35 13.4a.86.86 0 0 0 .31.96l10 7.27a.86.86 0 0 0 1 0l10-7.27a.86.86 0 0 0 .3-.97z" />
                         </svg>

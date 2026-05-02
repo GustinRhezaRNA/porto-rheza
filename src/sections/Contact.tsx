@@ -14,13 +14,15 @@ const Contact = () => {
                     <img
                         src="/Profile.jpg"
                         alt="user"
+                        loading="lazy"
+                        decoding="async"
                         className="w-40 h-40 rounded-xl object-cover"
                     />
-                    <div className="flex  gap-4 text-gray-400">
+                    <div className="flex  gap-4 text-gray-600">
 
 
 
-                        <a href="https://www.linkedin.com/in/gustin-rheza" className="hover:text-third transition">
+                        <a href="https://www.linkedin.com/in/gustin-rheza" aria-label="LinkedIn Profile" className="hover:text-third transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                                 <rect width="24" height="24" rx="4" fill="currentColor" />
                                 <circle cx="6.5" cy="6.5" r="1.5" fill="white" />
@@ -29,14 +31,14 @@ const Contact = () => {
                             </svg>
                         </a>
 
-                        <a href="mailto:rezarna4@gmail.com" className="hover:text-third transition">
+                        <a href="mailto:rezarna4@gmail.com" aria-label="Email Me" className="hover:text-third transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
                                 <path d="M22 6l-10 7L2 6" />
                             </svg>
                         </a>
 
-                        <a href="https://www.instagram.com/rhezaazdy" className="hover:text-third transition">
+                        <a href="https://www.instagram.com/rhezaazdy" aria-label="Instagram Profile" className="hover:text-third transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                                 <circle cx="12" cy="12" r="4" />
