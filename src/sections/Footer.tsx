@@ -53,12 +53,14 @@ const Footer = () => {
             </div>
 
             <div className="absolute left-1/2 -translate-x-1/2 bottom-8 sm:bottom-20">
-                <Button className="flex items-center gap-4 bg-black text-white rounded-full px-5 py-3 sm:px-3 sm:py-4 whitespace-nowrap">
-                    <span className="text-sm">Let's Discuss</span>
-                    <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center shrink-0">
-                        <ArrowRight className="w-3 h-3 text-black" />
-                    </span>
-                </Button>
+                <a href="#contact">
+                    <Button className="flex items-center gap-4 bg-black text-white rounded-full px-5 py-3 sm:px-3 sm:py-4 whitespace-nowrap hover:bg-gray-800 transition-colors">
+                        <span className="text-sm">Let's Discuss</span>
+                        <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center shrink-0">
+                            <ArrowRight className="w-3 h-3 text-black" />
+                        </span>
+                    </Button>
+                </a>
             </div>
 
         </footer>

@@ -25,7 +25,7 @@ const Navigation = () => {
                     </ul>
                 </div>
 
-                <a href="#contact" className="flex justify-end items-center gap-3 sm:gap-5 cursor-pointer group">
+                <a href="#contact" className="flex items-center gap-3 sm:gap-5 cursor-pointer group w-fit ml-auto">
                     <p className="text-white font-extralight text-lg sm:text-2xl hidden sm:block group-hover:text-third transition-colors">Let's discuss</p>
                     <Button
                         className="!rounded-full p-0 flex items-center justify-center cursor-pointer shadow-lg bg-third w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform"

@@ -16,7 +16,7 @@ const About = () => {
                     </p>
 
                     <div className="mt-3">
-                        <a href="#contact">
+                        <a href="#contact" className="w-fit block">
                             <Button className="flex items-center gap-4 bg-black text-white rounded-full px-5 py-8 hover:bg-gray-800 transition-colors">
                                 <span className="text-sm">Let's Discuss</span>
                                 <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center">
@@ -29,7 +29,7 @@ const About = () => {
 
                 <div className="sm:col-span-2">
                     <p className="text-xl sm:text-2xl leading-relaxed font-semibold">
-                        Web Developer with 1+ year internship experience in frontend development and backend integration. Experienced in building scalable, responsive web applications, integrating APIs, implementing authentication systems, and optimizing performance. Familiar with modern development workflows and collaborative environments. Passionate about delivering seamless user experiences and high-quality code.
+                        Web Developer with 1+ years of internship experience in frontend development and backend integration. Experienced in building scalable, responsive web applications, integrating APIs, implementing authentication systems, and optimizing performance. Familiar with modern development workflows and collaborative environments. Passionate about delivering seamless user experiences and high-quality code.
                     </p>
 
                 </div>

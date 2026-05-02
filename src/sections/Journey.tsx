@@ -46,7 +46,7 @@ const Journey = () => {
         {
             company: "Serena Hills Puncak Bogor",
             role: "Landing Page Builder",
-            period: "Des 2024 – Feb 2025",
+            period: "Dec 2024 – Feb 2025",
             type: "text",
             span: "sm:col-span-3",
         },
@@ -68,9 +68,10 @@ const Journey = () => {
                         key={index} 
                         className={`
                             ${item.span} 
+                            ${item.type === 'image' ? 'hidden sm:flex' : 'flex'}
                             relative overflow-hidden rounded-[2.5rem] 
                             bg-gray-200 border border-transparent
-                            p-8 sm:p-12 flex flex-col justify-between
+                            p-8 sm:p-12 flex-col justify-between
                             min-h-[300px] sm:min-h-[350px]
                             transition-all duration-700 ease-out
                             hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-2

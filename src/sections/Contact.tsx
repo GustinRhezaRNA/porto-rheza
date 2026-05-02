@@ -51,7 +51,7 @@ const Contact = () => {
 
                 <div className="sm:col-span-2">
                     <p className="text-lg sm:text-2xl font-normal">
-                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me through any of the platforms listed, and let's start a conversation about how we can work together to bring your ideas to life.
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out to me through any of the platforms listed, and let's start a conversation about how we can work together to bring your ideas to life.
                     </p>
                     <div className="mt-6">
                         <p className="font-semibold">Gustin Rheza</p>
