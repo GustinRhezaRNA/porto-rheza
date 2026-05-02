@@ -20,6 +20,9 @@ const Navigation = () => {
                             <a href="#projects" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Projects</a>
                         </li>
                         <li>
+                            <a href="#journey" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Journey</a>
+                        </li>
+                        <li>
                             <a href="#contact" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Contact</a>
                         </li>
                     </ul>
