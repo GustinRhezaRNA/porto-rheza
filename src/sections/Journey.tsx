@@ -69,7 +69,7 @@ const Journey = () => {
                         className={`
                             ${item.span} 
                             relative overflow-hidden rounded-[2.5rem] 
-                            bg-gray-100 border border-transparent
+                            bg-gray-200 border border-transparent
                             p-8 sm:p-12 flex flex-col justify-between
                             min-h-[300px] sm:min-h-[350px]
                             transition-all duration-700 ease-out

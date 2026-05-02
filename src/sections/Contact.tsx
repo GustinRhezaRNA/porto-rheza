@@ -30,14 +30,14 @@ const Contact = () => {
                         </a>
 
                         <a href="mailto:rezarna4@gmail.com" className="hover:text-third transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
                                 <path d="M22 6l-10 7L2 6" />
                             </svg>
                         </a>
 
                         <a href="https://www.instagram.com/rhezaazdy" className="hover:text-third transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                                 <circle cx="12" cy="12" r="4" />
                                 <circle cx="18" cy="6" r="1" />

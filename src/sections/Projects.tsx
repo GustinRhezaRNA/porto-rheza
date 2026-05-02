@@ -98,7 +98,7 @@ const Projects = () => {
 
 
             {/* Button Other Project  */}
-            <p className="flex flex-col justify-center mt-12 text-md cursor-pointer underline underline-offset-8 items-center font-semibold gap-2 " >
+            <div className="flex flex-col justify-center mt-12 text-md cursor-pointer underline underline-offset-8 items-center font-semibold gap-2 " >
                 Other Projects
                 <div className="flex gap-5 mt-3">
                     <a href="https://github.com/GustinRhezaRNA" className="hover:text-third transition">
@@ -123,7 +123,7 @@ const Projects = () => {
                         </svg>
                     </a>
                 </div>
-            </p>
+            </div>
 
         </div>
     )
