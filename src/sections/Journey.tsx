@@ -9,12 +9,12 @@ const Journey = () => {
         },
         {
             type: "image",
-            image: "/random1.jpg",
+            image: "/random1.webp",
             span: "sm:col-span-1",
         },
         {
             type: "image",
-            image: "/random2.jpg",
+            image: "/random2.webp",
             span: "sm:col-span-1",
         },
         {
@@ -40,7 +40,7 @@ const Journey = () => {
         },
         {
             type: "image",
-            image: "/random3.jpg",
+            image: "/random3.webp",
             span: "sm:col-span-1",
         },
         {
