@@ -12,7 +12,7 @@ const Contact = () => {
                         Contact
                     </p>
                     <img
-                        src="/Profile.jpg"
+                        src="/Profile.webp"
                         alt="user"
                         loading="lazy"
                         decoding="async"
