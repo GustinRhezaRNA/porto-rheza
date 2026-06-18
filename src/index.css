@@ -9,18 +9,17 @@ html, body {
 }
 
 :root {
-  /* Editorial monochrome palette */
+  /* Editorial monochrome palette (all-light) */
   --bg: #e7e6e1;       /* warm light gray page */
-  --ink: #16170f;      /* near-black text */
-  --olive: #3a3d33;    /* dark olive cards / footer */
-  --olive-2: #2f3229;  /* deeper olive */
+  --ink: #16170f;      /* near-black text + small accents */
   --muted: #8b8b83;    /* muted gray text */
-  --card: #d9d8d2;     /* light card surface */
-  --line: rgba(20, 23, 15, 0.14);
+  --card: #dcdbd5;     /* light card surface */
+  --card-hover: #d0cfc8;
+  --line: rgba(20, 23, 15, 0.16);
 
   /* legacy aliases kept so older refs don't break */
   --primary: var(--ink);
-  --secondary: var(--olive);
+  --secondary: var(--ink);
   --third: var(--ink);
 
   font: 400 16px/1.5 'Inter', sans-serif;

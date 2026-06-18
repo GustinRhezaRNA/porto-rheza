@@ -10,7 +10,7 @@ const About = () => {
         <section id="about" className="bg-bg px-6 py-24 text-ink sm:px-12">
 
             <p className="eyebrow flex items-center gap-2 text-muted">
-                <span className="h-2 w-2 bg-olive" />
+                <span className="h-2 w-2 bg-ink" />
                 About Me
             </p>
 
@@ -19,10 +19,10 @@ const About = () => {
                     Who<br />Am I
                 </h2>
 
-                {/* Olive card */}
-                <div className="rounded-sm bg-olive p-8 text-bg sm:p-12">
+                {/* Bio card */}
+                <div className="rounded-sm p-8 text-ink sm:p-12">
                     <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-                        <p className="text-lg leading-relaxed text-bg/90 sm:text-xl">
+                        <p className="text-lg leading-relaxed text-ink/90 sm:text-xl">
                             I am a Web Developer with 1+ years of experience in frontend development
                             and backend integration, based in Indonesia. I build scalable, responsive
                             web applications — integrating APIs, implementing authentication systems,
@@ -30,11 +30,11 @@ const About = () => {
                         </p>
 
                         <div>
-                            <p className="eyebrow text-bg/60">I specialize in:</p>
+                            <p className="eyebrow text-muted">I specialize in:</p>
                             <ul className="mt-4 space-y-4">
                                 {specialties.map((item) => (
-                                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-bg/85">
-                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-bg/70" />
+                                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-ink/75">
+                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/50" />
                                         {item}
                                     </li>
                                 ))}

@@ -7,12 +7,12 @@ const socials = [
 
 const Footer = () => {
     return (
-        <footer id="contact" className="bg-olive px-6 py-12 text-bg sm:px-12">
+        <footer id="contact" className="border-t border-line bg-card px-6 py-12 text-ink sm:px-12">
 
             {/* Top meta row */}
-            <div className="flex flex-col items-center gap-3 border-b border-bg/15 pb-8 text-[0.7rem] uppercase tracking-[0.22em] text-bg/60 sm:flex-row sm:justify-between">
+            <div className="flex flex-col items-center gap-3 border-b border-line pb-8 text-[0.7rem] uppercase tracking-[0.22em] text-muted sm:flex-row sm:justify-between">
                 <span>Portfolio 2024–2026</span>
-                <span className="font-semibold text-bg">Gustin Rheza ✦</span>
+                <span className="font-semibold text-ink">Gustin Rheza ✦</span>
                 <span>Available · Freelance Work</span>
             </div>
 
@@ -21,17 +21,17 @@ const Footer = () => {
                 <h2 className="display text-4xl sm:text-6xl lg:text-7xl">
                     Interested In<br />Working Together?
                 </h2>
-                <p className="mt-10 eyebrow text-bg/60">Drop me an email</p>
+                <p className="mt-10 eyebrow text-muted">Drop me an email</p>
                 <a
                     href="mailto:rezarna4@gmail.com"
-                    className="mt-2 text-lg font-semibold underline decoration-bg/40 underline-offset-8 transition-colors hover:decoration-bg sm:text-2xl"
+                    className="mt-2 text-lg font-semibold underline decoration-ink/30 underline-offset-8 transition-colors hover:decoration-ink sm:text-2xl"
                 >
                     rezarna4@gmail.com
                 </a>
             </div>
 
             {/* Bottom row */}
-            <div className="flex flex-col items-center gap-6 border-t border-bg/15 pt-8 text-[0.7rem] uppercase tracking-[0.22em] text-bg/60 sm:flex-row sm:justify-between">
+            <div className="flex flex-col items-center gap-6 border-t border-line pt-8 text-[0.7rem] uppercase tracking-[0.22em] text-muted sm:flex-row sm:justify-between">
                 <span>© {new Date().getFullYear()} — All rights reserved</span>
 
                 <div className="flex flex-wrap justify-center gap-3">
@@ -42,14 +42,14 @@ const Footer = () => {
                             aria-label={social.label}
                             target={social.href.startsWith("http") ? "_blank" : undefined}
                             rel={social.href.startsWith("http") ? "noreferrer" : undefined}
-                            className="rounded-full border border-bg/25 px-4 py-2 text-bg/80 transition-colors hover:bg-bg hover:text-ink"
+                            className="rounded-full border border-line px-4 py-2 text-ink/70 transition-colors hover:bg-ink hover:text-bg"
                         >
                             {social.label}
                         </a>
                     ))}
                 </div>
 
-                <a href="#home" className="text-bg/80 transition-colors hover:text-bg">
+                <a href="#home" className="text-ink/70 transition-colors hover:text-ink">
                     Back to top ↑
                 </a>
             </div>

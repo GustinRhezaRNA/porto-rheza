@@ -10,7 +10,7 @@ const links = [
 
 const Navigation = () => {
     return (
-        <nav className="flex flex-col w-full max-w-[240px]">
+        <nav className="hidden lg:flex flex-col w-full max-w-[240px]">
             <ul className="flex flex-col">
                 {links.map((link) => (
                     <li key={link.label}>
@@ -27,7 +27,7 @@ const Navigation = () => {
 
             <a
                 href="#contact"
-                className="mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-bg transition-colors hover:bg-olive"
+                className="mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-bg transition-colors hover:bg-ink/80"
             >
                 Let's Talk
                 <ArrowRight className="h-4 w-4" />

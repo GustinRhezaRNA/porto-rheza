@@ -14,14 +14,14 @@ const Header = () => {
             {/* Top tagline bar */}
             <div className="flex items-center justify-between border-b border-line px-6 py-4 text-[0.7rem] uppercase tracking-[0.22em] text-muted sm:px-12">
                 <span className="font-semibold text-ink">
-                    Gustin Rheza<span className="text-olive"> ✦</span>
+                    Gustin Rheza<span className="text-ink"> ✦</span>
                 </span>
                 <span className="hidden sm:block">Full-Stack Developer · Crafting modern web experiences</span>
                 <span className="hidden text-ink sm:block">Available for work</span>
             </div>
 
             {/* Faint background wordmark */}
-            <p className="pointer-events-none absolute right-4 top-16 select-none text-[18vw] font-bold leading-none tracking-tighter text-[#d3d2cb] sm:right-12 sm:top-20 lg:text-[13rem]">
+            <p aria-hidden="true" className="pointer-events-none absolute right-4 top-16 select-none text-[18vw] font-bold leading-none tracking-tighter text-[#d3d2cb] sm:right-12 sm:top-20 lg:text-[13rem]">
                 PORTOFOLIO
             </p>
 
@@ -36,7 +36,7 @@ const Header = () => {
                     {/* Right: heading + portrait */}
                     <div className="relative order-1 lg:order-2">
                         <div className="relative lg:min-h-[26rem]">
-                            <h1 className="display relative z-10 max-w-[14ch] text-[3.2rem] sm:text-[5rem] lg:text-[6.5rem] xl:text-[7.5rem]">
+                            <h1 className="display relative z-10 max-w-[14ch] text-[clamp(2.5rem,8vw,7.5rem)]">
                                 Creative Web<br />
                                 That Brings Your<br />
                                 Ideas to Life
@@ -61,7 +61,7 @@ const Header = () => {
 
                         <a
                             href="#contact"
-                            className="mt-5 inline-flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-olive"
+                            className="mt-5 inline-flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-ink/80"
                         >
                             Let's Discuss
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bg text-ink">

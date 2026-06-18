@@ -35,7 +35,7 @@ const Journey = () => {
             <div className="grid grid-cols-1 gap-8 border-t border-line pt-12 lg:grid-cols-2">
                 <div>
                     <p className="eyebrow flex items-center gap-2 text-muted">
-                        <span className="h-2 w-2 bg-olive" />
+                        <span className="h-2 w-2 bg-ink" />
                         My Journey
                     </p>
                     <h2 className="display mt-6 text-4xl sm:text-6xl">

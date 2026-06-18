@@ -9,10 +9,9 @@ export default {
       colors: {
         bg: "var(--bg)",
         ink: "var(--ink)",
-        olive: "var(--olive)",
-        "olive-2": "var(--olive-2)",
         muted: "var(--muted)",
         card: "var(--card)",
+        "card-hover": "var(--card-hover)",
         // legacy aliases
         primary: "var(--primary)",
         secondary: "var(--secondary)",

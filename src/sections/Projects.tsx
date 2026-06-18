@@ -71,7 +71,7 @@ const Projects = () => {
             <div className="grid grid-cols-1 gap-8 border-t border-line pt-12 lg:grid-cols-2">
                 <div>
                     <p className="eyebrow flex items-center gap-2 text-muted">
-                        <span className="h-2 w-2 bg-olive" />
+                        <span className="h-2 w-2 bg-ink" />
                         My Work
                     </p>
                     <h2 className="display mt-6 text-4xl sm:text-6xl">
@@ -91,14 +91,14 @@ const Projects = () => {
                         key={project.id}
                         className="group grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"
                     >
-                        {/* Olive info card */}
+                        {/* Info card */}
                         <div
-                            className={`flex flex-col justify-between rounded-sm bg-olive p-8 text-bg sm:p-10 ${
+                            className={`flex flex-col justify-between rounded-sm  p-8 text-ink sm:p-10 ${
                                 index % 2 === 1 ? "lg:order-2" : ""
                             }`}
                         >
                             <div>
-                                <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-bg/50">
+                                <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-muted">
                                     <span>{project.id}</span>
                                     <span>{project.year}</span>
                                 </div>
@@ -107,22 +107,22 @@ const Projects = () => {
                                     {project.tags.map((tag) => (
                                         <span
                                             key={tag}
-                                            className="rounded-full border border-bg/25 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-bg/80"
+                                            className="rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-ink/70"
                                         >
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <p className="mt-6 max-w-sm text-sm leading-relaxed text-bg/70">
+                                <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
                                     {project.description}
                                 </p>
                             </div>
 
                             <div className="mt-8 flex items-center justify-between">
-                                <span className="text-[0.7rem] uppercase tracking-[0.22em] text-bg/50">
+                                <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
                                     {project.category}
                                 </span>
-                                <span className="inline-flex items-center gap-2 rounded-full border border-bg/30 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bg transition-colors group-hover:bg-bg group-hover:text-ink">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ink transition-colors group-hover:bg-ink group-hover:text-bg">
                                     View
                                     <ArrowUpRight className="h-3.5 w-3.5" />
                                 </span>

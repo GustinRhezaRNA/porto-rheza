@@ -52,7 +52,7 @@ const Services = () => {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.6fr]">
                 <div>
                     <p className="eyebrow flex items-center gap-2 text-muted">
-                        <span className="h-2 w-2 bg-olive" />
+                        <span className="h-2 w-2 bg-ink" />
                         What I Do
                     </p>
                     <h2 className="display mt-6 text-4xl sm:text-6xl">
@@ -70,20 +70,20 @@ const Services = () => {
                         return (
                             <div
                                 key={service.title}
-                                className="group rounded-sm border border-line bg-card p-7 transition-colors hover:bg-olive hover:text-bg"
+                                className="group rounded-sm border border-line bg-card p-7 transition-colors hover:border-ink/40 hover:bg-card-hover"
                             >
-                                <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-olive text-bg transition-colors group-hover:bg-bg group-hover:text-ink">
+                                <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-ink text-bg">
                                     <Icon className="h-5 w-5" />
                                 </span>
                                 <h3 className="mt-5 text-xl font-semibold tracking-tight">{service.title}</h3>
-                                <p className="mt-3 text-sm leading-relaxed text-ink/60 group-hover:text-bg/70">
+                                <p className="mt-3 text-sm leading-relaxed text-ink/60">
                                     {service.description}
                                 </p>
                                 <div className="mt-5 flex flex-wrap gap-2">
                                     {service.tags.map((tag) => (
                                         <span
                                             key={tag}
-                                            className="rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-ink/70 group-hover:border-bg/30 group-hover:text-bg/80"
+                                            className="rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-ink/70"
                                         >
                                             {tag}
                                         </span>
