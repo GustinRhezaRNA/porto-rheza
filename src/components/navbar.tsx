@@ -1,42 +1,37 @@
-import { Button } from '@base-ui/react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
+
+const links = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Work', href: '#work' },
+    { label: 'Service', href: '#service' },
+    { label: 'Contact', href: '#contact' },
+]
 
 const Navigation = () => {
     return (
-        <nav className="relative z-50">
-            <div className="flex justify-between items-center p-4 sm:p-5 gap-4 sm:gap-10">
-                <div className="shrink-0">
-                    <a className="text-white font-bold text-xl sm:text-2xl">PORTOFOLIO
-                        <sup className="text-third h-2 w-2"> ✦</sup>
-                    </a>
-                </div>
+        <nav className="flex flex-col w-full max-w-[240px]">
+            <ul className="flex flex-col">
+                {links.map((link) => (
+                    <li key={link.label}>
+                        <a
+                            href={link.href}
+                            className="group flex items-center justify-between border-b border-line py-3 text-sm font-medium uppercase tracking-[0.18em] text-ink/80 transition-colors hover:text-ink"
+                        >
+                            {link.label}
+                            <ArrowUpRight className="h-4 w-4 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
+                        </a>
+                    </li>
+                ))}
+            </ul>
 
-                <div className="hidden sm:block">
-                    <ul className="flex justify-end gap-5">
-                        <li>
-                            <a href="#about" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">About</a>
-                        </li>
-                        <li>
-                            <a href="#projects" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#journey" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Journey</a>
-                        </li>
-                        <li>
-                            <a href="#contact" className="text-gray-500 font-light hover:text-third transition-colors cursor-pointer">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <a href="#contact" aria-label="Contact me via email or social media" className="flex items-center gap-3 sm:gap-5 cursor-pointer group w-fit ml-auto">
-                    <p className="text-white font-extralight text-lg sm:text-2xl hidden sm:block group-hover:text-third transition-colors">Let's discuss</p>
-                    <Button
-                        className="!rounded-full p-0 flex items-center justify-center cursor-pointer shadow-lg bg-third w-8 h-8 sm:w-10 sm:h-10 group-hover:scale-110 transition-transform"
-                    >
-                        <ArrowRight className="w-3 h-3 sm:w-6 sm:h-6" />
-                    </Button>
-                </a>
-            </div>
+            <a
+                href="#contact"
+                className="mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-bg transition-colors hover:bg-olive"
+            >
+                Let's Talk
+                <ArrowRight className="h-4 w-4" />
+            </a>
         </nav>
     )
 }
