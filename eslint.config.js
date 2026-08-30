@@ -6,7 +6,9 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // `build` is the React Router output dir; `.react-router` holds generated
+  // route types — neither is hand-written source.
+  globalIgnores(['dist', 'build', '.react-router']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -17,6 +19,30 @@ export default defineConfig([
     ],
     languageOptions: {
       globals: globals.browser,
+    },
+    rules: {
+      // React Router route modules must export `meta`/`links`/`loader`
+      // alongside the default component — that's the framework contract,
+      // not a Fast Refresh mistake.
+      'react-refresh/only-export-components': [
+        'error',
+        {
+          allowExportNames: [
+            'meta',
+            'links',
+            'headers',
+            'loader',
+            'clientLoader',
+            'action',
+            'clientAction',
+            'ErrorBoundary',
+            'HydrateFallback',
+            'shouldRevalidate',
+            'handle',
+            'Layout',
+          ],
+        },
+      ],
     },
   },
 ])

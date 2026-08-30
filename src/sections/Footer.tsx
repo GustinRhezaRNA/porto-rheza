@@ -49,7 +49,7 @@ const Footer = () => {
                     ))}
                 </div>
 
-                <a href="#home" className="text-ink/70 transition-colors hover:text-ink">
+                <a href="/#home" className="text-ink/70 transition-colors hover:text-ink">
                     Back to top ↑
                 </a>
             </div>

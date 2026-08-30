@@ -61,7 +61,7 @@ const Header = () => {
                         </p>
 
                         <a
-                            href="#contact"
+                            href="/#contact"
                             className="mt-5 inline-flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-ink/80"
                         >
                             Let's Build Something

@@ -1,68 +1,9 @@
-import { ArrowUpRight } from "lucide-react";
-
-type Project = {
-  id: string;
-  title: string;
-  year: string;
-  category: string;
-  image: string;
-  description: string;
-  tags: string[];
-  link?: string;
-};
-
-const projectData: Project[] = [
-  {
-    id: "001",
-    title: "Sinartama E-RUPS",
-    year: "2026",
-    category: "Enterprise Web Application",
-    image: "/sinartama.webp",
-    description:
-      "An enterprise e-RUPS platform that digitizes shareholder meetings — real-time voting, attendance, and secure document management at scale.",
-    tags: ["REACTJS", "LARAVEL"],
-  },
-  {
-    id: "002",
-    title: "Bikinkonten.ai",
-    year: "2025",
-    category: "SaaS Website",
-    image: "/bikinkonten.webp",
-    description:
-      "A full SaaS product for AI-assisted content creation, from authenticated dashboards to billing and generation workflows.",
-    tags: ["NEXTJS", "NESTJS"],
-  },
-  {
-    id: "003",
-    title: "Landing Page Bikinkonten.ai",
-    year: "2025",
-    category: "Landing Page",
-    image: "/lp-bikinkonten.webp",
-    description:
-      "A high-converting, animation-rich marketing landing page that communicates the product's value at a glance.",
-    tags: ["NEXTJS", "TAILWIND", "FRAMER"],
-  },
-  {
-    id: "004",
-    title: "Chatter Group ChatApp",
-    year: "2025",
-    category: "Real-time Messaging Web App",
-    image: "/chatter.webp",
-    description:
-      "A real-time group messaging application with live presence, channels, and persistent conversation history.",
-    tags: ["REACT", "NESTJS", "WebSocket", "GRAPHQL", "MongoDB"],
-  },
-  {
-    id: "005",
-    title: "Cinebox Movie App",
-    year: "2024",
-    category: "Movie Discovery Web",
-    image: "/cinebox.webp",
-    description:
-      "A movie discovery experience with search, rich detail pages, and curated browsing powered by a public film API.",
-    tags: ["REACT", "TMDB API", "TAILWIND"],
-  },
-];
+import { ArrowUpRight, Lock } from "lucide-react";
+import { Link } from "react-router";
+import { motion } from "framer-motion";
+import { projects } from "@/data/projects";
+import ConfidentialPlaceholder from "@/components/ConfidentialPlaceholder";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 
 const Projects = () => {
   return (
@@ -86,10 +27,11 @@ const Projects = () => {
         </p>
       </div>
 
-      <div className="mt-16 flex flex-col gap-16">
-        {projectData.map((project, index) => (
-          <article
-            key={project.id}
+      <motion.div {...staggerContainer} className="mt-16 flex flex-col gap-16">
+        {projects.map((project, index) => (
+          <motion.div key={project.id} variants={staggerItem.variants}>
+          <Link
+            to={`/projects/${project.slug}`}
             className="group grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"
           >
             {/* Info card */}
@@ -106,7 +48,7 @@ const Projects = () => {
                 <h3 className="display mt-6 text-3xl sm:text-4xl">
                   {project.title}
                 </h3>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap items-center gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -115,6 +57,12 @@ const Projects = () => {
                       {tag}
                     </span>
                   ))}
+                  {project.confidential && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-muted">
+                      <Lock className="h-3 w-3" />
+                      Confidential
+                    </span>
+                  )}
                 </div>
                 <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
                   {project.description}
@@ -138,17 +86,22 @@ const Projects = () => {
                 index % 2 === 1 ? "lg:order-1" : ""
               }`}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="lazy"
-                decoding="async"
-                className="h-full min-h-[260px] w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.03]"
-              />
+              {project.confidential || !project.image ? (
+                <ConfidentialPlaceholder />
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full min-h-[260px] w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.03]"
+                />
+              )}
             </div>
-          </article>
+          </Link>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Other projects */}
       <div className="mt-16 flex flex-col items-center gap-4 border-t border-line pt-12">
@@ -178,4 +131,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Projects

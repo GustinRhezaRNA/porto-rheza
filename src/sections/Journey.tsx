@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 
 const journeyData = [
   {
@@ -49,15 +51,16 @@ const Journey = () => {
         </div>
         <p className="max-w-md self-end text-sm leading-relaxed text-ink/60">
           A track record of hands-on development roles across startups,
-          technology companies, and government agencies — each one sharpening
+          technology companies, and government agencies, each one sharpening
           how I build for the web.
         </p>
       </div>
 
-      <div className="mt-14 flex flex-col">
+      <motion.div {...staggerContainer} className="mt-14 flex flex-col">
         {journeyData.map((item) => (
-          <div
+          <motion.div
             key={item.company}
+            variants={staggerItem.variants}
             className="group flex items-center justify-between gap-6 border-b border-line py-6 transition-colors hover:border-ink"
           >
             <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
@@ -74,9 +77,9 @@ const Journey = () => {
               </span>
               <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

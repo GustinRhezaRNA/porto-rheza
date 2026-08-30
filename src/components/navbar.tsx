@@ -1,11 +1,11 @@
 import { ArrowUpRight, ArrowRight } from 'lucide-react'
 
 const links = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Work', href: '#work' },
-    { label: 'Service', href: '#service' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/#home' },
+    { label: 'About', href: '/#about' },
+    { label: 'Work', href: '/#work' },
+    { label: 'Service', href: '/#service' },
+    { label: 'Contact', href: '/#contact' },
 ]
 
 const Navigation = () => {
@@ -26,7 +26,7 @@ const Navigation = () => {
             </ul>
 
             <a
-                href="#contact"
+                href="/#contact"
                 className="mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-bg transition-colors hover:bg-ink/80"
             >
                 Let's Talk
