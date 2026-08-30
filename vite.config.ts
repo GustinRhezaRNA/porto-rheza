@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { reactRouter } from '@react-router/dev/vite';
 import path from 'path';
 
 export default defineConfig({
-  base: "/", 
-  plugins: [react()],
+  base: "/",
+  // reactRouter() includes the React plugin itself — adding @vitejs/plugin-react
+  // alongside it would double-transform and break Fast Refresh.
+  plugins: [reactRouter()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -1,121 +1,87 @@
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "@/lib/motion";
+
+const journeyData = [
+  {
+    company: "Center for Environmental, Social, Governance Studies (CESGS)",
+    role: "Fullstack Developer",
+    period: "Jun 2026 – Now",
+  },
+  {
+    company: "PT. DOT Indonesia",
+    role: "Front End Developer Intern",
+    period: "Nov 2025 – Feb 2026",
+  },
+  {
+    company: "PT. Aira Teknologi Indonesia",
+    role: "Front End Developer Intern",
+    period: "Jul 2025 – Nov 2025",
+  },
+  {
+    company: "BMKG — Meteorology, Climatology & Geophysics Agency",
+    role: "Web Developer Intern",
+    period: "Jul 2025 – Aug 2025",
+  },
+  {
+    company: "PT. Ekata Technology Indonesia",
+    role: "Front End Developer Intern",
+    period: "Apr 2025 – Jul 2025",
+  },
+  {
+    company: "Serena Hills Puncak Bogor",
+    role: "Landing Page Builder",
+    period: "Dec 2024 – Feb 2025",
+  },
+];
+
 const Journey = () => {
-    const journeyData = [
-        {
-            company: "PT. DOT Indonesia",
-            role: "Front End Developer Intern",
-            period: "Nov 2025 – Feb 2026",
-            type: "text",
-            span: "sm:col-span-2",
-        },
-        {
-            type: "image",
-            image: "/random1.webp",
-            span: "sm:col-span-1",
-        },
-        {
-            type: "image",
-            image: "/random2.webp",
-            span: "sm:col-span-1",
-        },
-        {
-            company: "PT. Aira Teknologi Indonesia",
-            role: "Front End Developer Intern",
-            period: "July 2025 – Nov 2026",
-            type: "text",
-            span: "sm:col-span-1",
-        },
-        {
-            company: "BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)",
-            role: "Web Developer Intern",
-            period: "July 2025 – Aug 2025",
-            type: "text",
-            span: "sm:col-span-1",
-        },
-        {
-            company: "PT. Ekata Technology Indonesia",
-            role: "Front End Developer Intern",
-            period: "Apr 2025 – July 2026",
-            type: "text",
-            span: "sm:col-span-2",
-        },
-        {
-            type: "image",
-            image: "/random3.webp",
-            span: "sm:col-span-1",
-        },
-        {
-            company: "Serena Hills Puncak Bogor",
-            role: "Landing Page Builder",
-            period: "Dec 2024 – Feb 2025",
-            type: "text",
-            span: "sm:col-span-3",
-        },
-    ];
-
-    return (
-        <div id="journey" className="bg-white text-black px-6 sm:px-20 py-16">
-            
-            <div className="border-t border-black/10 mb-16"></div>
-
-            <p className="text-xl uppercase flex items-center gap-3 font-medium mb-16 tracking-widest">
-                <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                My Journey
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
-                {journeyData.map((item, index) => (
-                    <div 
-                        key={index} 
-                        className={`
-                            ${item.span} 
-                            ${item.type === 'image' ? 'hidden sm:flex' : 'flex'}
-                            relative overflow-hidden rounded-[2.5rem] 
-                            bg-gray-200 border border-transparent
-                            p-8 sm:p-12 flex-col justify-between
-                            min-h-[300px] sm:min-h-[350px]
-                            transition-all duration-700 ease-out
-                            hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-2
-                            group
-                        `}
-                    >
-                        {item.type === "text" ? (
-                            <>
-                                <div>
-                                    <h1 className="text-2xl sm:text-3xl font-bold leading-[1.1] mb-6 tracking-tight text-gray-900">
-                                        {item.company}
-                                    </h1>
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-[10px] uppercase tracking-[0.25em] font-bold text-gray-400 group-hover:text-secondary transition-colors duration-500">
-                                            {item.role}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="mt-auto">
-                                    <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-gray-600 ">
-                                        {item.period}
-                                    </span>
-                                </div>
-                            </>
-                        ) : (
-                            <div className="absolute inset-0">
-                                <img 
-                                    src={item.image} 
-                                    alt="Journey" 
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-700"></div>
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-
-            <div className="border-t border-black/10 mt-28"></div>
-
+  return (
+    <section id="journey" className="bg-bg px-6 py-24 text-ink sm:px-12">
+      <div className="grid grid-cols-1 gap-8 border-t border-line pt-12 lg:grid-cols-2">
+        <div>
+          <p className="eyebrow flex items-center gap-2 text-muted">
+            <span className="h-2 w-2 bg-ink" />
+            My Journey
+          </p>
+          <h2 className="display mt-6 text-4xl sm:text-6xl">
+            Experience
+            <br />& Roles
+          </h2>
         </div>
-    )
-}
+        <p className="max-w-md self-end text-sm leading-relaxed text-ink/60">
+          A track record of hands-on development roles across startups,
+          technology companies, and government agencies, each one sharpening
+          how I build for the web.
+        </p>
+      </div>
 
-export default Journey
+      <motion.div {...staggerContainer} className="mt-14 flex flex-col">
+        {journeyData.map((item) => (
+          <motion.div
+            key={item.company}
+            variants={staggerItem.variants}
+            className="group flex items-center justify-between gap-6 border-b border-line py-6 transition-colors hover:border-ink"
+          >
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
+              <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">
+                {item.company}
+              </h3>
+              <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
+                {item.role}
+              </span>
+            </div>
+            <div className="flex items-center gap-4 sm:gap-8">
+              <span className="hidden text-[0.7rem] uppercase tracking-[0.22em] text-ink/60 sm:block">
+                {item.period}
+              </span>
+              <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+};
+
+export default Journey;

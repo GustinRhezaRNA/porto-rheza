@@ -1,47 +1,61 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+const specialties = [
+  "Frontend Engineering: building responsive, accessible, and maintainable interfaces with React & Next.js",
+  "Backend Engineering: designing APIs, integrating databases, and building reliable application services",
+  "Product Engineering: turning ideas and requirements into practical, scalable digital products",
+  "Authentication & Security: implementing secure authentication, authorization",
+  "Performance & Reliabilit: optimizing applications for speed, scalability, and a smooth user experience",
+  "End-to-End Delivery: taking features from development to deployment and production"
+];
 
 const About = () => {
-    return (
-        <div id="about" className="bg-white text-black px-6 sm:px-12 py-28">
+  return (
+    <section id="about" className="bg-bg px-6 py-24 text-ink sm:px-12">
+      <p className="eyebrow flex items-center gap-2 text-muted">
+        <span className="h-2 w-2 bg-ink" />
+        About Me
+      </p>
 
-            <div className="border-t border-black/20 mb-12"></div>
+      <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.4fr]">
+        <h2 className="display text-4xl sm:text-6xl">
+          Who
+          <br />
+          Am I
+        </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+        {/* Bio card */}
+        <div className="rounded-sm p-8 text-ink sm:p-12">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <p className="text-lg leading-relaxed text-ink/90 sm:text-xl">
+              I’m a Software Engineer with 1+ years of experience building and
+              shipping web applications from idea to production, based in
+              Indonesia. I work across the stack, designing frontend
+              experiences, building backend systems, integrating APIs and
+              databases, and making sure everything works reliably in
+              production.
+            </p>
 
-                <div className="sm:col-span-1 flex flex-col justify-between">
-                    <p className="text-xl uppercase  flex items-center gap-2 font-medium">
-                        <span className="w-2 h-2 bg-green-500"></span>
-                        WHO AM I?
-                    </p>
-
-                    <div className="mt-3">
-                        <a href="#contact" className="w-fit block">
-                            <Button className="flex items-center gap-4 bg-black text-white rounded-full px-5 py-8 hover:bg-gray-800 transition-colors">
-                                <span className="text-sm">Let's Discuss</span>
-                                <span className="bg-green-400 rounded-full w-6 h-6 flex items-center justify-center">
-                                    <ArrowRight className="w-3 h-3" />
-                                </span>
-                            </Button>
-                        </a>
+            <div>
+              <p className="eyebrow text-muted">I specialize in:</p>
+              <ul className="mt-4 space-y-4">
+                {specialties.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3 text-sm leading-relaxed text-ink/75"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/50" />
+                    <div>
+                      <span className="font-bold">{item.split(":", 2)[0]}</span>
+                      <span className="flex-1">{":" + item.split(":", 2)[1]}</span>
                     </div>
-                </div>
-
-                <div className="sm:col-span-2">
-                    <p className="text-xl sm:text-2xl leading-relaxed font-semibold">
-                        Web Developer with 1+ years experience in frontend development and backend integration. Experienced in building scalable, responsive web applications, integrating APIs, implementing authentication systems, and optimizing performance. Familiar with modern development workflows and collaborative environments. Passionate about delivering seamless user experiences and high-quality code.
-                    </p>
-
-                </div>
-
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            {/* BOTTOM LINE */}
-            <div className="border-t border-black/20 mt-12"></div>
-
+          </div>
         </div>
+      </div>
+    </section>
+  );
+};
 
-    )
-}
-
-export default About
+export default About;

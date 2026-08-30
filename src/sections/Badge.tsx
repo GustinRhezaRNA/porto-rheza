@@ -16,27 +16,17 @@ const RotatingBadge = () => {
   const content = items.join("     /     ")
 
   return (
-    <div className="relative overflow-hidden bg-black border-y border-[var(--third)] py-6 sm:py-8">
+    <div aria-hidden="true" className="relative overflow-hidden border-y border-line bg-card py-5 sm:py-6">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-card to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-card to-transparent" />
 
-      {/* fade kiri */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-black to-transparent z-10" />
-
-      {/* fade kanan */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-black to-transparent z-10" />
-
-      {/* TRACK */}
-      <div className="flex w-max animate-marquee  will-change-transform">
-        
-        {/* content 1 */}
-        <span className="px-120 text-[var(--third)] tracking-[0.35em] text-base sm:text-lg whitespace-nowrap">
+      <div className="flex w-max animate-marquee will-change-transform">
+        <span className="px-8 whitespace-nowrap text-sm tracking-[0.35em] text-ink/70 sm:text-base">
           {content}
         </span>
-
-        {/* content 2 (duplicate) */}
-        <span className="px-8 text-[var(--third)] tracking-[0.35em] text-base sm:text-lg whitespace-nowrap">
+        <span className="px-8 whitespace-nowrap text-sm tracking-[0.35em] text-ink/70 sm:text-base">
           {content}
         </span>
-
       </div>
     </div>
   )
