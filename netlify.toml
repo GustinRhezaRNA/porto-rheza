@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  # React Router's prerender output. NOT "dist" — that was the old Vite SPA path.
+  publish = "build/client"
+
+[build.environment]
+  # @react-router/dev requires Node >=20; pin so Netlify's default can't drift below it.
+  NODE_VERSION = "22"
+
+# Fallback for URLs with no prerendered file (typo'd slugs, old links).
+#
+# This must NOT be a forced rule (`force = false` is the default): Netlify
+# serves an existing static file in preference to a non-forced redirect, so
+# the 7 prerendered pages are still served as themselves. Adding `force = true`
+# here would shadow every one of them with the fallback shell and silently
+# undo the prerendering.
+[[redirects]]
+  from = "/*"
+  to = "/__spa-fallback.html"
+  status = 200
+
+# Hashed build assets are immutable — cache them hard.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

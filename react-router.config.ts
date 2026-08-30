@@ -4,7 +4,7 @@ import { projects } from "./src/data/projects";
 export default {
   appDirectory: "src",
 
-  // No runtime server — this deploys as static files to Vercel.
+  // No runtime server — this deploys as static files to Netlify.
   ssr: false,
 
   // Every route is emitted as real HTML at build time. This is what makes the
