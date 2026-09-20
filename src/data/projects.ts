@@ -33,41 +33,54 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "000",
-    slug: "project-management-platform",
-    title: "Project Management Platform",
+    slug: "enterprise-operations-platform",
+    title: "Enterprise Operations & Project Management Platform",
     year: "2026",
-    category: "Full-stack Web Application",
+    category: "Product Engineering",
     description:
-      "A full-stack project management platform built to centralize project execution, task tracking, collaboration, documentation, meetings, and team workflows.",
+      "A production-grade internal operational platform combining project management, collaboration, workflow automation, data aggregation, management reporting, and external service integrations.",
     confidential: true,
     tags: ["REACT", "NESTJS", "POSTGRESQL", "REDIS"],
+
     detail: {
       role: "Full-stack Engineer",
 
       problem:
-        "Project-related work was spread across multiple workflows and required a centralized platform to improve visibility, coordination, and day-to-day execution across teams.",
+        "Project-related work was distributed across multiple workflows, making coordination, information visibility, operational tracking, and management reporting difficult to handle consistently. The organization needed a centralized platform capable of supporting day-to-day execution while transforming operational data into higher-level management information.",
 
       solution:
-        "Built a full-stack project management platform that brings project tracking, task management, timelines, documents, meetings, meeting minutes, and scheduling workflows into a single application.",
+        "Designed and developed a full-stack internal platform that centralizes project execution, task management, timelines, documentation, meetings, scheduling, collaboration, notifications, approvals, and management reporting within a single application.",
 
       architecture:
-        "Designed and developed the application as a modular full-stack system, working across the frontend, backend, database, caching, background processing, and deployment layers.",
+        "Designed and developed the platform as a modular full-stack system spanning 22 backend modules and 33 relational data tables, taking ownership across requirements discovery, application architecture, frontend, backend, data modeling, business logic, data aggregation, caching, asynchronous processing, integrations, security, deployment, and production support.",
 
       architectureSteps: [
-        "Analyzed stakeholder requirements and translated them into technical workflows and application features",
-        "Designed the overall application structure and data relationships",
-        "Developed the frontend using React, TypeScript, Vite, and component-based architecture",
-        "Implemented backend APIs and business logic using NestJS",
-        "Designed and integrated PostgreSQL data models for core application entities",
-        "Implemented authentication and authorization across protected application areas",
-        "Integrated TanStack Query for server-state management, data fetching, and caching on the frontend",
-        "Implemented Redis-based caching to reduce unnecessary database operations",
-        "Introduced asynchronous background processing for operations that should not block the request lifecycle",
+        "Analyzed stakeholder requirements and translated non-technical workflows into technical requirements, application flows, data relationships, and implementable features",
+        "Designed the overall application architecture, module boundaries, and relational data model across interconnected application domains",
+        "Developed the frontend using React, TypeScript, Vite, and reusable component-based architecture",
+        "Implemented modular backend APIs and business logic using NestJS",
+        "Designed and integrated PostgreSQL data models supporting interconnected project, task, document, meeting, scheduling, collaboration, and reporting workflows",
+        "Implemented data aggregation and calculation logic to transform operational records into derived management information",
+        "Built reporting and dashboard workflows that combine data from multiple related domains into role-aware management views",
+        "Implemented JWT-based authentication using secure httpOnly cookies and Argon2 password hashing",
+        "Implemented role-based authorization with differentiated read and mutation permissions across application domains",
+        "Integrated TanStack Query for server-state management, data fetching, synchronization, and client-side caching",
+        "Introduced Redis caching for frequently accessed and derived data to reduce unnecessary database operations",
+        "Implemented asynchronous background processing using BullMQ and Redis for non-blocking application workloads",
+        "Implemented retry handling for background email and notification jobs",
+        "Implemented email and web-push notification workflows for application events",
         "Implemented API rate limiting and application-level security controls",
-        "Established and validated database backup and restore procedures",
-        "Containerized the application stack and worked on production deployment and environment configuration",
-        "Implemented internationalization to support Indonesian and English interfaces",
-        "Tested and refined features based on stakeholder feedback and real application usage",
+        "Implemented document and attachment handling using object storage and secure upload flows",
+        "Integrated external calendar services through OAuth-based authentication for scheduling workflows",
+        "Implemented meeting coordination, scheduling, approval, collaboration, and notification workflows",
+        "Established database migration, backup, and restoration procedures as part of production operations",
+        "Implemented automated database backup workflows with off-site object storage for operational resilience",
+        "Implemented application health checks and production-oriented safeguards",
+        "Containerized the application using Docker and contributed to CI/CD, container registry, environment configuration, and production deployment workflows",
+        "Implemented Indonesian and English interfaces through application internationalization",
+        "Developed and maintained automated tests for critical application workflows",
+        "Tested, audited, and refined AI-assisted implementations before integrating them into the production codebase",
+        "Maintained and iterated on the production system after release, including troubleshooting, user support, and continuous improvements",
       ],
 
       techStack: [
@@ -86,7 +99,7 @@ export const projects: Project[] = [
         },
         {
           group: "Backend",
-          items: ["NestJS", "TypeScript"],
+          items: ["NestJS 11", "TypeScript", "TypeORM", "JWT", "Argon2"],
         },
         {
           group: "Database",
@@ -94,18 +107,29 @@ export const projects: Project[] = [
         },
         {
           group: "Infrastructure",
-          items: ["Redis", "BullMQ", "Docker"],
+          items: ["Redis", "BullMQ", "Docker", "AWS S3", "GHCR"],
+        },
+        {
+          group: "Integrations",
+          items: ["OAuth", "Google Calendar", "Email", "Web Push"],
         },
       ],
 
       impact: [
-        "Delivered a centralized platform for project execution, task management, collaboration, documentation, and meeting workflows.",
-        "Improved warm endpoint response time by approximately 38% through Redis caching.",
-        "Moved email processing off the request path and introduced automatic retries through BullMQ, with up to 3 retry attempts.",
-        "Validated database backup and restore procedures with a 608 ms backup and 1.2 s restore while maintaining exact row-count parity.",
-        "Implemented and verified login rate limiting, returning HTTP 429 after the 6th attempt within a 60-second window.",
-        "Supported bilingual application experiences through internationalization.",
-        "Owned end-to-end development across frontend, backend, database, and infrastructure.",
+        "Delivered a centralized production platform spanning 20+ production features across project execution, task management, collaboration, documentation, meetings, scheduling, notifications, approvals, and management reporting.",
+        "Designed a modular backend architecture spanning 22 modules and 33 relational data tables to support interconnected operational workflows.",
+        "Implemented aggregation and calculation workflows that transform interconnected operational records into derived management information.",
+        "Built management reporting and dashboard capabilities that combine data from multiple application domains into role-aware views.",
+        "Established separation between transactional data, derived information, and management-oriented presentation layers to keep reporting workflows maintainable.",
+        "Improved application efficiency through Redis caching for frequently accessed and derived data.",
+        "Moved non-critical workloads into asynchronous BullMQ jobs, including email and notification processing with retry handling.",
+        "Implemented secure authentication and authorization using JWT, httpOnly cookies, Argon2, and role-based access control.",
+        "Implemented document management and secure object-storage workflows for application attachments.",
+        "Integrated external calendar services to support application scheduling workflows.",
+        "Established automated database backup and validated restoration procedures as part of production reliability practices.",
+        "Implemented application health checks, rate limiting, automated testing, database migrations, and deployment safeguards.",
+        "Supported bilingual application experiences through Indonesian and English internationalization.",
+        "Owned end-to-end product development across requirements discovery, system design, frontend, backend, database, infrastructure, testing, deployment, and ongoing production support.",
       ],
     },
   },
