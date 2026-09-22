@@ -1,9 +1,147 @@
 import { ArrowUpRight, Lock } from "lucide-react";
-import { Link } from "react-router";
-import { motion } from "framer-motion";
-import { projects } from "@/data/projects";
+import { Link, useViewTransitionState } from "react-router";
+import { m } from "framer-motion";
+import { useRef } from "react";
+import { projects, type Project } from "@/data/projects";
 import ConfidentialPlaceholder from "@/components/ConfidentialPlaceholder";
 import { staggerContainer, staggerItem } from "@/lib/motion";
+import { gsap, useGSAP } from "@/lib/gsap";
+
+// Same shape as `staggerItem`, but the entrance also slides in from the side
+// the card is offset toward (it alternates with `index % 2`, mirroring the
+// layout's own `lg:order-2` swap), instead of every card sliding up flat.
+const cardVariants = (index: number) => ({
+  hidden: { ...staggerItem.variants.hidden, x: index % 2 === 1 ? 40 : -40 },
+  visible: { ...staggerItem.variants.visible, x: 0 },
+});
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const to = `/projects/${project.slug}`;
+  // `view-transition-name` must be unique document-wide while a transition is
+  // in flight — with 6+ cards all pointing at the same name, the browser
+  // silently aborts the transition. Only the card actually being navigated
+  // away from claims the name; every other card's image stays "none".
+  const isTransitioning = useViewTransitionState(to);
+
+  const frameRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!parallaxRef.current) return;
+    const mm = gsap.matchMedia();
+
+    // The heaviest scroll effect on the page — up to 4 of these running at
+    // once — so it's restricted to desktop-with-a-mouse, where there's
+    // screen real estate and headroom to spend on it.
+    mm.add(
+      "(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      () => {
+        gsap.fromTo(
+          parallaxRef.current,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: frameRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.6,
+            },
+          }
+        );
+      }
+    );
+
+    return () => mm.revert();
+  }, { scope: frameRef });
+
+  return (
+    <Link
+      to={to}
+      viewTransition
+      data-cursor="view"
+      data-cursor-label="View"
+      className="group grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"
+    >
+      {/* Info card */}
+      <div
+        className={`flex flex-col justify-between rounded-sm  p-8 text-ink sm:p-10 ${
+          index % 2 === 1 ? "lg:order-2" : ""
+        }`}
+      >
+        <div>
+          <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-muted">
+            <span>{project.id}</span>
+            <span>{project.year}</span>
+          </div>
+          <h3 className="display mt-6 text-3xl sm:text-4xl">
+            {project.title}
+          </h3>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-ink/70"
+              >
+                {tag}
+              </span>
+            ))}
+            {project.confidential && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-muted">
+                <Lock className="h-3 w-3" />
+                Confidential
+              </span>
+            )}
+          </div>
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
+            {project.description}
+          </p>
+        </div>
+
+        <div className="mt-8 flex items-center justify-between">
+          <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
+            {project.category}
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ink transition-colors group-hover:bg-ink group-hover:text-bg">
+            View
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+      </div>
+
+      {/* Screenshot. `aspect-[16/10]` gives this a fixed height up front —
+          without it, the lazy-loaded <img> lands and changes the section's
+          height, and every ScrollTrigger below this point on the page ends
+          up measuring against stale positions. */}
+      <div
+        ref={frameRef}
+        className={`relative aspect-[16/10] overflow-hidden rounded-sm bg-card ${
+          index % 2 === 1 ? "lg:order-1" : ""
+        }`}
+      >
+        {project.confidential || !project.image ? (
+          <ConfidentialPlaceholder />
+        ) : (
+          // GSAP owns this wrapper's transform (scroll-scrubbed yPercent);
+          // the <img> inside owns its own independent transform for the CSS
+          // hover scale. Nesting them keeps the two systems from fighting
+          // over a single `transform` property.
+          <div ref={parallaxRef} className="absolute -top-[10%] h-[120%] w-full">
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              style={{ viewTransitionName: isTransitioning ? "project-hero" : "none" }}
+              className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]"
+            />
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+};
 
 const Projects = () => {
   return (
@@ -27,81 +165,13 @@ const Projects = () => {
         </p>
       </div>
 
-      <motion.div {...staggerContainer} className="mt-16 flex flex-col gap-16">
+      <m.div {...staggerContainer} className="mt-16 flex flex-col gap-16">
         {projects.map((project, index) => (
-          <motion.div key={project.id} variants={staggerItem.variants}>
-          <Link
-            to={`/projects/${project.slug}`}
-            className="group grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"
-          >
-            {/* Info card */}
-            <div
-              className={`flex flex-col justify-between rounded-sm  p-8 text-ink sm:p-10 ${
-                index % 2 === 1 ? "lg:order-2" : ""
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-                  <span>{project.id}</span>
-                  <span>{project.year}</span>
-                </div>
-                <h3 className="display mt-6 text-3xl sm:text-4xl">
-                  {project.title}
-                </h3>
-                <div className="mt-5 flex flex-wrap items-center gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-ink/70"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.confidential && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-muted">
-                      <Lock className="h-3 w-3" />
-                      Confidential
-                    </span>
-                  )}
-                </div>
-                <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
-                  {project.description}
-                </p>
-              </div>
-
-              <div className="mt-8 flex items-center justify-between">
-                <span className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-                  {project.category}
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-ink transition-colors group-hover:bg-ink group-hover:text-bg">
-                  View
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
-              </div>
-            </div>
-
-            {/* Screenshot */}
-            <div
-              className={`relative overflow-hidden rounded-sm bg-card ${
-                index % 2 === 1 ? "lg:order-1" : ""
-              }`}
-            >
-              {project.confidential || !project.image ? (
-                <ConfidentialPlaceholder />
-              ) : (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full min-h-[260px] w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.03]"
-                />
-              )}
-            </div>
-          </Link>
-          </motion.div>
+          <m.div key={project.id} variants={cardVariants(index)}>
+            <ProjectCard project={project} index={index} />
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
 
       {/* Other projects */}
       <div className="mt-16 flex flex-col items-center gap-4 border-t border-line pt-12">
@@ -110,6 +180,7 @@ const Projects = () => {
           <a
             href="https://github.com/GustinRhezaRNA"
             aria-label="GitHub Profile"
+            data-cursor="link"
             className="text-ink/70 transition hover:text-ink"
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -119,6 +190,7 @@ const Projects = () => {
           <a
             href="https://gitlab.com/rezarna4"
             aria-label="GitLab Profile"
+            data-cursor="link"
             className="text-ink/70 transition hover:text-ink"
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">

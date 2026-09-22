@@ -1,6 +1,20 @@
+import { LazyMotion, MotionConfig } from "framer-motion";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import type { LinksFunction } from "react-router";
+import Cursor from "@/components/Cursor";
+import Preloader from "@/components/Preloader";
+import ScrollProgress from "@/components/ScrollProgress";
+import { PRELOADER_ATTR, PRELOADER_SESSION_KEY } from "@/lib/preloader";
+import "@fontsource-variable/inter/index.css";
 import "./index.css";
+
+// Every `m.*` component in the app (there is no bare `motion.*` usage left —
+// `LazyMotion` is `strict` below, which throws if there is) pulls its actual
+// animation implementation from this chunk, fetched after first paint rather
+// than bundled into the critical path. The static alternative
+// (`import { domAnimation } from "framer-motion"`) works too, but ships that
+// ~16KB gzipped with the initial JS instead of deferring it.
+const loadDomAnimation = () => import("framer-motion").then((mod) => mod.domAnimation);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -34,13 +48,21 @@ const personSchema = {
 
 export const links: LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
 ];
+
+// Runs before first paint (it's a plain, render-blocking <script> in <head>,
+// not React), and is the only thing that decides whether the preloader shows
+// at all. Bails out — leaving the page to paint normally with no curtain —
+// on a returning visit this session, under prefers-reduced-motion, or on any
+// route other than "/". A static string, identical between the prerendered
+// HTML and React's own render of this same tag, so it hydrates cleanly with
+// no mismatch.
+const preloaderBootScript = `(function(){try{
+  if(sessionStorage.getItem(${JSON.stringify(PRELOADER_SESSION_KEY)})) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(location.pathname !== '/') return;
+  document.documentElement.setAttribute(${JSON.stringify(PRELOADER_ATTR)}, '1');
+}catch(e){}})();`;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -59,6 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="twitter:card" content="summary" />
         <Meta />
         <Links />
+        <script dangerouslySetInnerHTML={{ __html: preloaderBootScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -74,5 +97,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function Root() {
-  return <Outlet />;
+  return (
+    <LazyMotion features={loadDomAnimation} strict>
+      <MotionConfig reducedMotion="user">
+        {/* Mounted here, not inside a page, so it survives client-side
+            navigation between routes instead of remounting on every page —
+            Preloader in particular must never remount on a route change, or
+            it would replay on every internal link click. */}
+        <Preloader />
+        <ScrollProgress />
+        <Cursor />
+        <Outlet />
+      </MotionConfig>
+    </LazyMotion>
+  );
 }

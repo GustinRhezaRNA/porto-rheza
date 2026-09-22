@@ -1,3 +1,7 @@
+import { Link } from "react-router"
+import { useRef } from "react"
+import { gsap, SplitText, useGSAP } from "@/lib/gsap"
+
 const socials = [
     { label: "GitHub", href: "https://github.com/GustinRhezaRNA" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/gustin-rheza" },
@@ -6,6 +10,50 @@ const socials = [
 ]
 
 const Footer = () => {
+    const headingRef = useRef<HTMLHeadingElement>(null)
+
+    useGSAP(() => {
+        const mm = gsap.matchMedia()
+
+        mm.add("(prefers-reduced-motion: no-preference)", () => {
+            // Same font.fonts.ready gate as the hero: splitting before the
+            // webfont lands measures the fallback font's line breaks, so the
+            // reveal masks end up the wrong height.
+            let cancelled = false
+            let split: SplitText | undefined
+            let tween: gsap.core.Tween | undefined
+
+            document.fonts.ready.then(() => {
+                if (cancelled || !headingRef.current) return
+
+                split = SplitText.create(headingRef.current, {
+                    type: "lines",
+                    mask: "lines",
+                })
+
+                tween = gsap.from(split.lines, {
+                    yPercent: 110,
+                    stagger: 0.12,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: headingRef.current,
+                        start: "top 85%",
+                        once: true,
+                    },
+                })
+            })
+
+            return () => {
+                cancelled = true
+                tween?.kill()
+                split?.revert()
+            }
+        })
+
+        return () => mm.revert()
+    })
+
     return (
         <footer id="contact" className="border-t border-line bg-card px-6 py-12 text-ink sm:px-12">
 
@@ -18,12 +66,13 @@ const Footer = () => {
 
             {/* CTA */}
             <div className="flex flex-col items-center py-20 text-center sm:py-28">
-                <h2 className="display text-4xl sm:text-6xl lg:text-7xl">
+                <h2 ref={headingRef} className="display text-4xl sm:text-6xl lg:text-7xl">
                     Interested In<br />Working Together?
                 </h2>
                 <p className="mt-10 eyebrow text-muted">Drop me an email</p>
                 <a
                     href="mailto:rezarna4@gmail.com"
+                    data-cursor="link"
                     className="mt-2 text-lg font-semibold underline decoration-ink/30 underline-offset-8 transition-colors hover:decoration-ink sm:text-2xl"
                 >
                     rezarna4@gmail.com
@@ -42,6 +91,7 @@ const Footer = () => {
                             aria-label={social.label}
                             target={social.href.startsWith("http") ? "_blank" : undefined}
                             rel={social.href.startsWith("http") ? "noreferrer" : undefined}
+                            data-cursor="link"
                             className="rounded-full border border-line px-4 py-2 text-ink/70 transition-colors hover:bg-ink hover:text-bg"
                         >
                             {social.label}
@@ -49,9 +99,9 @@ const Footer = () => {
                     ))}
                 </div>
 
-                <a href="/#home" className="text-ink/70 transition-colors hover:text-ink">
+                <Link to="/#home" data-cursor="link" className="text-ink/70 transition-colors hover:text-ink">
                     Back to top ↑
-                </a>
+                </Link>
             </div>
         </footer>
     )
