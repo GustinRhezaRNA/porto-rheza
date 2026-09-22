@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+
 const socials = [
     { label: "GitHub", href: "https://github.com/GustinRhezaRNA" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/gustin-rheza" },
@@ -49,9 +51,9 @@ const Footer = () => {
                     ))}
                 </div>
 
-                <a href="/#home" className="text-ink/70 transition-colors hover:text-ink">
+                <Link to="/#home" className="text-ink/70 transition-colors hover:text-ink">
                     Back to top ↑
-                </a>
+                </Link>
             </div>
         </footer>
     )

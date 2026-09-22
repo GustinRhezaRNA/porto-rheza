@@ -1,5 +1,6 @@
 import Navigation from "@/components/navbar"
 import { ArrowRight } from "lucide-react"
+import { Link } from "react-router"
 
 const stats = [
     { value: "1+", label: "Years of experience" },
@@ -60,15 +61,15 @@ const Header = () => {
                             frontend experiences and deployment.
                         </p>
 
-                        <a
-                            href="/#contact"
+                        <Link
+                            to="/#contact"
                             className="mt-5 inline-flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-ink/80"
                         >
                             Let's Build Something
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bg text-ink">
                                 <ArrowRight className="h-3 w-3" />
                             </span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

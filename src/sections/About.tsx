@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "@/lib/motion";
+
 const specialties = [
   "Frontend Engineering: building responsive, accessible, and maintainable interfaces with React & Next.js",
   "Backend Engineering: designing APIs, integrating databases, and building reliable application services",
@@ -36,10 +39,11 @@ const About = () => {
 
             <div>
               <p className="eyebrow text-muted">I specialize in:</p>
-              <ul className="mt-4 space-y-4">
+              <motion.ul {...staggerContainer} className="mt-4 space-y-4">
                 {specialties.map((item) => (
-                  <li
+                  <motion.li
                     key={item}
+                    variants={staggerItem.variants}
                     className="flex gap-3 text-sm leading-relaxed text-ink/75"
                   >
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/50" />
@@ -47,9 +51,9 @@ const About = () => {
                       <span className="font-bold">{item.split(":", 2)[0]}</span>
                       <span className="flex-1">{":" + item.split(":", 2)[1]}</span>
                     </div>
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
             </div>
           </div>
         </div>

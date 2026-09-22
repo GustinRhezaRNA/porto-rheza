@@ -194,6 +194,8 @@ const ProjectDetail = () => {
               <img
                 src={project.image}
                 alt={project.title}
+                fetchPriority="high"
+                decoding="async"
                 className="h-full max-h-[560px] w-full object-cover"
               />
             )}

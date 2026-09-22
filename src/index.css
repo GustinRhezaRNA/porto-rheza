@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  scroll-behavior: smooth;
-  max-width: 100%;
-  overflow-x: hidden;
+html {
+  /* `clip` prevents horizontal overflow without turning html into its own
+     scroll container the way `hidden` does — that matters once anything
+     uses `position: sticky` or GSAP ScrollTrigger pinning, which measure
+     against the real document scrollport. */
+  overflow-x: clip;
 }
 
 :root {
@@ -22,7 +24,7 @@ html, body {
   --secondary: var(--ink);
   --third: var(--ink);
 
-  font: 400 16px/1.5 'Inter', sans-serif;
+  font: 400 16px/1.5 'Inter Variable', sans-serif;
 }
 
 body {
@@ -32,7 +34,7 @@ body {
 }
 
 .inter-font {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter Variable', sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
@@ -51,4 +53,18 @@ body {
   letter-spacing: 0.22em;
   font-size: 0.7rem;
   font-weight: 600;
+}
+
+/* Respect the OS-level "reduce motion" request: collapse every CSS
+   animation/transition to effectively instant. framer-motion is covered
+   separately by <MotionConfig reducedMotion="user"> in root.tsx. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
