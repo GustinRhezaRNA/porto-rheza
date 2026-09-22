@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Lock } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router";
 import type { MetaFunction } from "react-router";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { reveal, staggerContainer, staggerItem } from "@/lib/motion";
 import Footer from "@/sections/Footer";
@@ -79,6 +79,8 @@ const ProjectDetail = () => {
         {/* Back link */}
         <Link
           to="/"
+          viewTransition
+          data-cursor="link"
           className="eyebrow inline-flex items-center gap-2 text-muted transition-colors hover:text-ink"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
@@ -86,7 +88,7 @@ const ProjectDetail = () => {
         </Link>
 
         {/* Hero */}
-        <motion.div {...reveal} className="mt-10 border-t border-line pt-12">
+        <m.div {...reveal} className="mt-10 border-t border-line pt-12">
           <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-muted">
             <span>{project.id}</span>
             <span>{project.year}</span>
@@ -144,6 +146,7 @@ const ProjectDetail = () => {
                     href={detail.liveUrl}
                     target="_blank"
                     rel="noreferrer"
+                    data-cursor="link"
                     className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-ink/80"
                   >
                     View Live
@@ -155,6 +158,7 @@ const ProjectDetail = () => {
                     href={detail.repoUrls.repo}
                     target="_blank"
                     rel="noreferrer"
+                    data-cursor="link"
                     className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-bg"
                   >
                     View Repo
@@ -166,6 +170,7 @@ const ProjectDetail = () => {
                     href={detail.repoUrls.frontend}
                     target="_blank"
                     rel="noreferrer"
+                    data-cursor="link"
                     className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-bg"
                   >
                     Frontend Repo
@@ -177,6 +182,7 @@ const ProjectDetail = () => {
                     href={detail.repoUrls.backend}
                     target="_blank"
                     rel="noreferrer"
+                    data-cursor="link"
                     className="inline-flex items-center gap-2 rounded-full border border-ink/30 px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-bg"
                   >
                     Backend Repo
@@ -196,15 +202,16 @@ const ProjectDetail = () => {
                 alt={project.title}
                 fetchPriority="high"
                 decoding="async"
+                style={{ viewTransitionName: "project-hero" }}
                 className="h-full max-h-[560px] w-full object-cover"
               />
             )}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Problem */}
         {detail.problem && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Problem</p>
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               What needed solving
@@ -212,12 +219,12 @@ const ProjectDetail = () => {
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/60 sm:text-base">
               {detail.problem}
             </p>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Solution */}
         {detail.solution && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Solution</p>
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               How it was approached
@@ -225,12 +232,12 @@ const ProjectDetail = () => {
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/60 sm:text-base">
               {detail.solution}
             </p>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Architecture */}
         {(detail.architecture || (detail.architectureSteps?.length ?? 0) > 0) && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Architecture</p>
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               How it's built
@@ -241,12 +248,12 @@ const ProjectDetail = () => {
               </p>
             )}
             {detail.architectureSteps && detail.architectureSteps.length > 0 && (
-              <motion.ol
+              <m.ol
                 {...staggerContainer}
                 className="mt-6 max-w-2xl space-y-3"
               >
                 {detail.architectureSteps.map((step, i) => (
-                  <motion.li
+                  <m.li
                     key={i}
                     variants={staggerItem.variants}
                     className="flex gap-4 text-sm leading-relaxed text-ink/60 sm:text-base"
@@ -255,26 +262,26 @@ const ProjectDetail = () => {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span>{step}</span>
-                  </motion.li>
+                  </m.li>
                 ))}
-              </motion.ol>
+              </m.ol>
             )}
-          </motion.div>
+          </m.div>
         )}
 
         {/* Tech Stack */}
         {detail.techStack.length > 0 && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Tech Stack</p>
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               What it's built with
             </h2>
-            <motion.div
+            <m.div
               {...staggerContainer}
               className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
             >
               {detail.techStack.map((group) => (
-                <motion.div key={group.group} variants={staggerItem.variants}>
+                <m.div key={group.group} variants={staggerItem.variants}>
                   <p className="text-[0.7rem] uppercase tracking-[0.22em] text-muted">
                     {group.group}
                   </p>
@@ -288,37 +295,37 @@ const ProjectDetail = () => {
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
 
         {/* Impact */}
         {detail.impact.length > 0 && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Impact</p>
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               What it achieved
             </h2>
-            <motion.ul {...staggerContainer} className="mt-6 max-w-2xl space-y-3">
+            <m.ul {...staggerContainer} className="mt-6 max-w-2xl space-y-3">
               {detail.impact.map((point, i) => (
-                <motion.li
+                <m.li
                   key={i}
                   variants={staggerItem.variants}
                   className="flex gap-3 text-sm leading-relaxed text-ink/60 sm:text-base"
                 >
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
                   <span>{point}</span>
-                </motion.li>
+                </m.li>
               ))}
-            </motion.ul>
-          </motion.div>
+            </m.ul>
+          </m.div>
         )}
 
         {/* Gallery */}
         {detail.gallery && detail.gallery.length > 0 && (
-          <motion.div {...reveal} className="mt-16 border-t border-line pt-12">
+          <m.div {...reveal} className="mt-16 border-t border-line pt-12">
             <p className="eyebrow text-muted">Gallery</p>
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {detail.gallery.map((src) => (
@@ -327,7 +334,7 @@ const ProjectDetail = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Next project */}
@@ -335,6 +342,8 @@ const ProjectDetail = () => {
           <p className="eyebrow text-muted">Next Project</p>
           <Link
             to={`/projects/${next.slug}`}
+            viewTransition
+            data-cursor="link"
             className="group inline-flex items-center gap-3 text-2xl font-semibold sm:text-4xl"
           >
             <span className="display">{next.title}</span>

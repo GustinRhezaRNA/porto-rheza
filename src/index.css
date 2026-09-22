@@ -55,9 +55,54 @@ body {
   font-weight: 600;
 }
 
+/* Preloader curtain. The blocking script in root.tsx's <head> sets
+   [data-preloader="1"] on <html> before first paint; this pseudo-element
+   covers the page from that instant, closing the gap between "browser
+   paints the prerendered HTML" and "React hydrates and Preloader.tsx takes
+   over". React never renders this element, so it can't hydration-mismatch
+   on it. Preloader.tsx clears the attribute itself when it finishes, which
+   removes this rule's match and drops the curtain.
+   Attribute name must match PRELOADER_ATTR in src/lib/preloader.ts. */
+html[data-preloader="1"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+}
+
+/* Hide the native cursor only where the custom one (src/components/Cursor.tsx)
+   actually renders: a real mouse, and no reduced-motion request. Scoping this
+   in CSS to the exact same condition the component checks in JS means a
+   touch/reduced-motion visitor never loses their only cursor to a component
+   that decided not to mount. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html,
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
+/* View Transitions — cross-fade between routes (<Link viewTransition>),
+   with the project screenshot morphing into the detail-page hero when both
+   ends of the navigation tag the same element `project-hero`. Unsupported
+   browsers ignore all of this and just navigate instantly. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+}
+
+::view-transition-group(project-hero) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
 /* Respect the OS-level "reduce motion" request: collapse every CSS
    animation/transition to effectively instant. framer-motion is covered
-   separately by <MotionConfig reducedMotion="user"> in root.tsx. */
+   separately by <MotionConfig reducedMotion="user"> in root.tsx, and GSAP
+   scroll/entrance effects are gated per-effect via gsap.matchMedia(). */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -66,5 +111,13 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The universal selector above does not reach the view-transition
+     pseudo-element tree — it needs its own explicit override. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

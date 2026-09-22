@@ -6,7 +6,7 @@ import {
   Rocket,
   type LucideIcon,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 type Service = {
@@ -77,16 +77,17 @@ const Services = () => {
           </p>{" "}
         </div>
 
-        <motion.div
+        <m.div
           {...staggerContainer}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2"
         >
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <motion.div
+              <m.div
                 key={service.title}
                 variants={staggerItem.variants}
+                data-cursor="hover"
                 className="group rounded-sm border border-line bg-card p-7 transition-colors hover:border-ink/40 hover:bg-card-hover"
               >
                 <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-ink text-bg">
@@ -108,10 +109,10 @@ const Services = () => {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

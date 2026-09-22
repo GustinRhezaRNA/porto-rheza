@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 const specialties = [
@@ -39,9 +39,9 @@ const About = () => {
 
             <div>
               <p className="eyebrow text-muted">I specialize in:</p>
-              <motion.ul {...staggerContainer} className="mt-4 space-y-4">
+              <m.ul {...staggerContainer} className="mt-4 space-y-4">
                 {specialties.map((item) => (
-                  <motion.li
+                  <m.li
                     key={item}
                     variants={staggerItem.variants}
                     className="flex gap-3 text-sm leading-relaxed text-ink/75"
@@ -51,9 +51,9 @@ const About = () => {
                       <span className="font-bold">{item.split(":", 2)[0]}</span>
                       <span className="flex-1">{":" + item.split(":", 2)[1]}</span>
                     </div>
-                  </motion.li>
+                  </m.li>
                 ))}
-              </motion.ul>
+              </m.ul>
             </div>
           </div>
         </div>
