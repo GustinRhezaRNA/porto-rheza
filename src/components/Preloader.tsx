@@ -5,8 +5,10 @@ import {
     PRELOADER_ATTR,
     PRELOADER_CAP_MS,
     PRELOADER_EXIT_EVENT,
+    PRELOADER_FLAG,
     PRELOADER_MIN_MS,
     PRELOADER_SESSION_KEY,
+    isPreloaderPending,
 } from "@/lib/preloader"
 
 // Mounted in root.tsx, outside <Outlet/>, so it never remounts on a
@@ -27,7 +29,11 @@ const Preloader = () => {
     // nothing for React to hydration-mismatch on; the CSS curtain in
     // index.css covers the page for the one frame in between regardless.
     useLayoutEffect(() => {
-        if (document.documentElement.getAttribute(PRELOADER_ATTR) === "1") {
+        if (isPreloaderPending()) {
+            // Re-assert the attribute: a failed hydration (React #418) makes
+            // React re-render <html> from scratch and strip it, which would
+            // drop the CSS curtain and hide the preloader entirely.
+            document.documentElement.setAttribute(PRELOADER_ATTR, "1")
             // Deliberate, not an anti-pattern here: `active` starts `false` so
             // the server render and the client's FIRST (hydration) render
             // agree exactly, with nothing to mismatch on. This setState
@@ -73,6 +79,7 @@ const Preloader = () => {
                         // worst case the visitor just sees this again next time.
                     }
                     document.documentElement.removeAttribute(PRELOADER_ATTR)
+                    window[PRELOADER_FLAG] = false
                     // Tells anything waiting on it (the hero entrance timeline
                     // in Header.tsx) that it's safe to start now — right as
                     // this curtain begins clearing, not sometime earlier while

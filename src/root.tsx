@@ -4,7 +4,7 @@ import type { LinksFunction } from "react-router";
 import Cursor from "@/components/Cursor";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
-import { PRELOADER_ATTR, PRELOADER_SESSION_KEY } from "@/lib/preloader";
+import { PRELOADER_ATTR, PRELOADER_FLAG, PRELOADER_SESSION_KEY } from "@/lib/preloader";
 import "@fontsource-variable/inter/index.css";
 import "./index.css";
 
@@ -61,6 +61,7 @@ const preloaderBootScript = `(function(){try{
   if(sessionStorage.getItem(${JSON.stringify(PRELOADER_SESSION_KEY)})) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if(location.pathname !== '/') return;
+  window[${JSON.stringify(PRELOADER_FLAG)}] = true;
   document.documentElement.setAttribute(${JSON.stringify(PRELOADER_ATTR)}, '1');
 }catch(e){}})();`;
 
