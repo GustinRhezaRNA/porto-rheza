@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import type { MetaFunction } from 'react-router'
 import About from '@/sections/About'
 import RotatingBadge from '@/sections/Badge'
@@ -48,22 +48,22 @@ const HomePage = () => {
         <RotatingBadge />
       </div>
 
-      <motion.div {...reveal}>
+      <m.div {...reveal}>
         <About />
-      </motion.div>
+      </m.div>
 
-      <motion.div {...reveal}>
+      <m.div {...reveal}>
         <Services />
-      </motion.div>
+      </m.div>
 
       {/* Not wrapped in `reveal`: Projects staggers its own cards internally.
           Wrapping a multi-screen-tall section in a single whileInView fade
           also risks the section never triggering. */}
       <Projects />
 
-      <motion.div {...reveal}>
+      <m.div {...reveal}>
         <Journey />
-      </motion.div>
+      </m.div>
 
       <Footer />
     </>
