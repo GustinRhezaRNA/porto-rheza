@@ -8,6 +8,12 @@ import Footer from "@/sections/Footer";
 import ConfidentialPlaceholder from "@/components/ConfidentialPlaceholder";
 
 const SITE = "https://gustinrheza.com";
+const POINTS_PER_COLUMN = 20;
+
+const splitIntoColumns = <T,>(items: T[]): T[][] =>
+  Array.from({ length: Math.ceil(items.length / POINTS_PER_COLUMN) }, (_, index) =>
+    items.slice(index * POINTS_PER_COLUMN, (index + 1) * POINTS_PER_COLUMN),
+  );
 
 // Runs at build time for each prerendered slug, so every project page ships
 // its own title/description/og tags in static HTML — this is what makes
@@ -248,23 +254,24 @@ const ProjectDetail = () => {
               </p>
             )}
             {detail.architectureSteps && detail.architectureSteps.length > 0 && (
-              <m.ol
-                {...staggerContainer}
-                className="mt-6 max-w-2xl space-y-3"
-              >
-                {detail.architectureSteps.map((step, i) => (
-                  <m.li
-                    key={i}
-                    variants={staggerItem.variants}
-                    className="flex gap-4 text-sm leading-relaxed text-ink/60 sm:text-base"
-                  >
-                    <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span>{step}</span>
-                  </m.li>
+              <div className={`mt-6 grid gap-x-12 gap-y-3 ${detail.architectureSteps.length > POINTS_PER_COLUMN ? "max-w-5xl md:grid-cols-2" : "max-w-2xl"}`}>
+                {splitIntoColumns(detail.architectureSteps).map((column, columnIndex) => (
+                  <m.ol {...staggerContainer} key={columnIndex} className="space-y-3">
+                    {column.map((step, index) => (
+                      <m.li
+                        key={index}
+                        variants={staggerItem.variants}
+                        className="flex gap-4 text-sm leading-relaxed text-ink/60 sm:text-base"
+                      >
+                        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
+                          {String(columnIndex * POINTS_PER_COLUMN + index + 1).padStart(2, "0")}
+                        </span>
+                        <span>{step}</span>
+                      </m.li>
+                    ))}
+                  </m.ol>
                 ))}
-              </m.ol>
+              </div>
             )}
           </m.div>
         )}
@@ -308,18 +315,22 @@ const ProjectDetail = () => {
             <h2 className="display mt-4 max-w-2xl text-2xl sm:text-3xl">
               What it achieved
             </h2>
-            <m.ul {...staggerContainer} className="mt-6 max-w-2xl space-y-3">
-              {detail.impact.map((point, i) => (
-                <m.li
-                  key={i}
-                  variants={staggerItem.variants}
-                  className="flex gap-3 text-sm leading-relaxed text-ink/60 sm:text-base"
-                >
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
-                  <span>{point}</span>
-                </m.li>
+            <div className={`mt-6 grid gap-x-12 gap-y-3 ${detail.impact.length > POINTS_PER_COLUMN ? "max-w-5xl md:grid-cols-2" : "max-w-2xl"}`}>
+              {splitIntoColumns(detail.impact).map((column, columnIndex) => (
+                <m.ul {...staggerContainer} key={columnIndex} className="space-y-3">
+                  {column.map((point, index) => (
+                    <m.li
+                      key={index}
+                      variants={staggerItem.variants}
+                      className="flex gap-3 text-sm leading-relaxed text-ink/60 sm:text-base"
+                    >
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+                      <span>{point}</span>
+                    </m.li>
+                  ))}
+                </m.ul>
               ))}
-            </m.ul>
+            </div>
           </m.div>
         )}
 
